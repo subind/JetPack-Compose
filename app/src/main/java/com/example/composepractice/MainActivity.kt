@@ -16,25 +16,27 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposePracticeTheme {
-                TextViewHello("Subi")
-            }
+            MessageCard("Subi")
         }
     }
 }
 
 @Composable
-fun TextViewHello(name: String) {
+fun MessageCard(name: String) {
     Text(text = "Hello $name !!!")
 }
 
+/**
+ * The Preview annotation must only be used on a function that takes no parameters.
+ * Hence declare another function & invoke the function to be previewed within it
+ */
 @Preview
     (name = "Preview Name",
     showBackground = true,
     showSystemUi = true)
 @Composable
-fun DefaultPreview() {
+fun PreviewMessageCard() {
     ComposePracticeTheme {
-        TextViewHello("Android")
+        MessageCard("Android")
     }
 }

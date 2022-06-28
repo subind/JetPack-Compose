@@ -1,10 +1,12 @@
 package com.example.composepractice
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
@@ -24,7 +26,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MessageCard(Message("Subind", "JetpackCompose"))
+            ComposePracticeTheme() {
+                MessageCard(Message("Subind", "JetpackCompose"))
+            }
         }
     }
 }
@@ -39,16 +43,21 @@ fun MessageCard(msg: Message) {
             contentDescription = "Contact Profile Pic",
             modifier = Modifier
                 .size(100.dp)
-                .clip(CircleShape),
-        contentScale = ContentScale.Crop)
-        
+                .clip(CircleShape)
+                .border(2.dp, MaterialTheme.colors.secondaryVariant, CircleShape),
+            contentScale = ContentScale.Crop
+        )
+
         Spacer(modifier = Modifier.width(10.dp))
-        
+
         Column() {
             Spacer(modifier = Modifier.height(25.dp))
-            Text(text = "Author: ${msg.author}")
+            Text(text = "Author: ${msg.author}", color = MaterialTheme.colors.secondaryVariant, style = MaterialTheme.typography.body1)
             Spacer(modifier = Modifier.height(10.dp))
-            Text(text = "Body: ${msg.body}")
+            //Provides shape
+            Surface(shape = MaterialTheme.shapes.medium, elevation = 2.dp) {
+                Text(text = "Body: ${msg.body}", style = MaterialTheme.typography.body2, modifier = Modifier.padding(2.dp))
+            }
         }
     }
 }
@@ -59,9 +68,14 @@ fun MessageCard(msg: Message) {
  */
 @Preview
     (
-    name = "Preview Name",
+    name = "Light mode",
+    showBackground = true
+)
+@Preview
+    (
+    name = "Dark mode",
     showBackground = true,
-    showSystemUi = true
+    uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 @Composable
 fun PreviewMessageCard() {

@@ -17,27 +17,24 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposePracticeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
+                TextViewHello("Subi")
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun TextViewHello(name: String) {
+    Text(text = "Hello $name !!!")
 }
 
-@Preview(showBackground = true)
+@Preview
+    (name = "Preview Name",
+    showBackground = true,
+    showSystemUi = true)
 @Composable
 fun DefaultPreview() {
     ComposePracticeTheme {
-        Greeting("Android")
+        TextViewHello("Android")
     }
 }
